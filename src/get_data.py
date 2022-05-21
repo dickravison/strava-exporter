@@ -107,7 +107,7 @@ def getActivities(client_id, client_secret, access_token, user):
             startofweek = sdate - timedelta(days=sdate.weekday())
             datestring = startofweek.strftime("#%Y#%m#%d#")
             item['SK'] = 'ACTIVITY#' + item['activity'] + datestring + str(item['id'])
-            
+
             try:
                 response = table.put_item(
                     Item=item,
@@ -116,12 +116,3 @@ def getActivities(client_id, client_secret, access_token, user):
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] != 'ConditionalCheckFailedException':
                     raise
-
-
-
-
-
-
-
-
-
