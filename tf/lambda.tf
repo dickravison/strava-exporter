@@ -153,7 +153,7 @@ EOF
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
   inline_policy {
     name   = "dynamodb_query"
-    policy = data.aws_iam_policy_document.dynamodb.json
+    policy = data.aws_iam_policy_document.dynamodb_query.json
   }
   inline_policy {
     name   = "sns_publish"
@@ -164,7 +164,7 @@ EOF
 data "aws_iam_policy_document" "dynamodb_query" {
   statement {
     actions   = ["dynamodb:Query"]
-    resources = [aws_dynamodb_table.strava_data.arn]
+    resources = [aws_dynamodb_table.strava_data.arn, "${aws_dynamodb_table.strava_data.arn}/*"]
   }
 }
 

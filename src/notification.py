@@ -16,14 +16,14 @@ def lambda_handler(event, context):
         KeyConditionExpression=(Key('PK').eq(pk) & Key('SK').eq(sk)),
     )
     r = response['Items']
-    uid = r[0]['GSI1PK'] 
+    uid = r[0]['GSI1SK'] 
     
     #Get todays date and what weekday it is
     today=datetime.today()
     startOfMonth=today.strftime('%d')
     startOfWeek=today.weekday()
     
-    if startOfMonth == "1":
+    if startOfMonth == "01":
         #Get last month, format it and pass to notify function
         thismonth = int(today.strftime("%m"))
         lastmonth = thismonth - 1
