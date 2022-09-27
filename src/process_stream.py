@@ -16,7 +16,8 @@ def lambda_handler(event, context):
             movingtime = int(float(record['dynamodb']['NewImage']['moving_time']['N']))
             
             #Convert date from Strava format for use as sort key and also find the start of the week for the activity
-            sdate = datetime.strptime(date,"%Y-%m-%dT%H:%M:%SZ")
+            formatdate = datetime.strptime(date,"%Y-%m-%dT%H:%M:%SZ")
+            sdate = formatdate - timedelta(days=formatdate.weekday())
             weekstring = sdate.strftime("%Y#%m#%d")
             week = "STATS#" + activity + "#" + weekstring
             

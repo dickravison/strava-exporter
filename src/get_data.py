@@ -104,8 +104,7 @@ def getActivities(client_id, client_secret, access_token, user):
         if item['activity'] in ('SWIM', 'RUN', 'BIKE'):
             #Format sort key
             sdate = datetime.strptime(item['GSI1SK'],"%Y-%m-%dT%H:%M:%SZ")
-            startofweek = sdate - timedelta(days=sdate.weekday())
-            datestring = startofweek.strftime("#%Y#%m#%d#")
+            datestring = sdate.strftime("#%Y#%m#%d#")
             item['SK'] = 'ACTIVITY#' + item['activity'] + datestring + str(item['id'])
 
             try:

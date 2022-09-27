@@ -11,7 +11,7 @@ resource "aws_cloudwatch_event_target" "strava_exporter" {
   rule      = aws_cloudwatch_event_rule.strava_exporter.name
   target_id = "export-strava-data"
   arn       = aws_lambda_function.strava_exporter.arn
-  input     = "{\"USER\":[\"${var.username}\"]}"
+  input     = "{\"USER\":\"${var.username}\"}"
 }
 
 #Create Eventbridge rule to invoke Lambda function weekly
@@ -27,7 +27,7 @@ resource "aws_cloudwatch_event_target" "weekly_notifier" {
   rule      = aws_cloudwatch_event_rule.weekly_notifier.name
   target_id = "strava-weekly-stats"
   arn       = aws_lambda_function.strava_notifier.arn
-  input     = "{\"USER\":[\"${var.username}\"]}"
+  input     = "{\"USER\":\"${var.username}\"}"
 }
 
 #Create Eventbridge rule to invoke Lambda function monthly
@@ -43,5 +43,5 @@ resource "aws_cloudwatch_event_target" "notifier" {
   rule      = aws_cloudwatch_event_rule.monthly_notifier.name
   target_id = "strava-monthly-stats"
   arn       = aws_lambda_function.strava_notifier.arn
-  input     = "{\"USER\":[\"${var.username}\"]}"
+  input     = "{\"USER\":\"${var.username}\"}"
 }
